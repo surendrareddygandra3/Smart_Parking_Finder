@@ -1,8 +1,9 @@
 from fastapi import APIRouter, HTTPException, Header, Query
-from app.core.dependencies import validate_token
+from app.core.auth import get_auth_context
 from app.services.booking_service import create_booking, list_bookings, get_booking_by_id, release_booking, update_booking
 from app.models.booking_models import CreateBookingRequest, CreateBookingResponse, BookingsResponse, BookingByIdResponse, UpdateBookingRequest
 from app.utils.logger import get_logger
+from fastapi import Depends
 
 router = APIRouter()
 
@@ -11,21 +12,14 @@ logger = get_logger(__name__)
 @router.post("/create")
 async def create_booking_route(
     booking_data: CreateBookingRequest,
-    authorization: str = Header(...),
+    auth: dict = Depends(get_auth_context),
 ):
     """
     Create a new parking booking (with JWT auth).
     """
     try:
-        # ✅ Extract and validate token
-        token = authorization.replace("Bearer ", "").strip()
-        user = await validate_token(token)  # <-- validate JWT
-
-        if not user:
-            raise HTTPException(status_code=401, detail="Invalid or expired token")
-
         # ✅ Pass user info if you need (e.g., user_id, email)
-        result = await create_booking(booking_data, user)
+        result = await create_booking(booking_data, auth["payload"])
 
         return result
 

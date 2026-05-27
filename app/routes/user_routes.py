@@ -3,6 +3,7 @@ from app.models.user_models import Register_Request, Register_Response, Login_Re
 from app.services.user_service import register_user,login_user, update_user, change_password, password_reset_with_otp,forgot_password, verify_otp_and_reset_password, logout_user_service
 from app.utils.decorator import handle_exceptions
 from app.utils.logger import get_logger
+from app.core.auth import get_auth_context, get_current_token
  
 router = APIRouter()
 
@@ -24,20 +25,16 @@ async def login(data: Login_Request):
 @router.put("/update", response_model=Update_Details_Response)
 async def update_user_route(
     update_data: Update_Details_Request,
-    authorization: str = Header(...)
+    auth: dict = Depends(get_auth_context),
 ):  
     logger.info("User profile update requested.")
-    token = authorization.replace("Bearer ", "").strip()
-    return await update_user(token, update_data)
+    return await update_user(auth["token"], update_data)
 
 @handle_exceptions
 @router.put("/change_password")
-async def change_password_route(change_request: Change_Password, authorization: str = Header(...)):
-    if not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Invalid token format")
-    token = authorization[len("Bearer "):].strip()
+async def change_password_route(change_request: Change_Password, auth: dict = Depends(get_auth_context)):
     logger.info("Password change request received.")
-    return await change_password(token, change_request)
+    return await change_password(auth["token"], change_request)
 
 @handle_exceptions
 @router.post("/change_password/otp")
@@ -60,7 +57,6 @@ async def verify_otp(data:Verify_Otp_Request):
 
 @handle_exceptions
 @router.post("/logout")
-async def logout_route(authorization: str= Header(...)):
-    token = authorization.replace("Bearer ", "").strip()
+async def logout_route(token: str = Depends(get_current_token)):
     return await logout_user_service(token)
 

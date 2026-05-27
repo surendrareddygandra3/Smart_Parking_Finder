@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from app.db.mongo_db import db, parkings_collection, bookings_collection
 from app.models.booking_models import CreateBookingRequest
-from app. utils.logger import get_logger
+from app.utils.logger import get_logger
 from app.core.security import verify_jwt
 from datetime import datetime
 import uuid
