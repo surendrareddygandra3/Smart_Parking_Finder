@@ -270,3 +270,36 @@
 2026-05-29 18:23:56,457 - app.core.middleware - INFO - MainThread - request
 2026-05-29 18:23:56,471 - app.core.middleware - INFO - MainThread - request
 2026-05-29 18:23:56,474 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:19:48,630 - app.core.dependencies - INFO - MainThread - Session created for surendrareddygandra3@gmail.com
+2026-05-29 19:19:48,644 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:19:48,715 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:19:48,859 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:19:48,873 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:01,701 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:01,726 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:01,748 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:03,448 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:03,471 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:03,493 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:05,216 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:05,242 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:05,246 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:06,596 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:06,619 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:06,633 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:07,857 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:07,882 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:07,887 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:09,291 - app.services.booking_service - INFO - MainThread - Booking BB0E370BE created for surendrareddygandra3@gmail.com at lot 1 slot 1-2
+2026-05-29 19:20:09,299 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:09,324 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:09,330 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:32,972 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:32,976 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:46,857 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:20:46,874 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:21:46,239 - app.core.dependencies - INFO - MainThread - Session created for surendrareddygandra3@gmail.com
+2026-05-29 19:21:46,240 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:21:46,255 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:21:46,298 - app.core.middleware - INFO - MainThread - request
+2026-05-29 19:21:46,316 - app.core.middleware - INFO - MainThread - request
