@@ -69,10 +69,9 @@ async def login(identifier: str, password: str) -> dict:
         }
     )
 
-    # Keep compatibility: session store for access token checks (existing validate_token)
-    await login_sessions_collection.insert_one(
-        {"email": email, "username": principal.get("username", ""), "token": access_token, "created_at": datetime.utcnow(), "status": "Active"}
-    )
+    from app.core.dependencies import store_session
+
+    await store_session(email, principal.get("username", ""), access_token)
 
     return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
 
@@ -118,10 +117,9 @@ async def refresh(refresh_token: str) -> dict:
         }
     )
 
-    # Refresh session record for access token compatibility checks
-    await login_sessions_collection.insert_one(
-        {"email": email, "username": "", "token": access_token, "created_at": datetime.utcnow(), "status": "Active"}
-    )
+    from app.core.dependencies import store_session
+
+    await store_session(email, "", access_token)
 
     return {"access_token": access_token, "refresh_token": new_refresh_token, "token_type": "bearer"}
 

@@ -23,8 +23,12 @@ export function LoginPage() {
       const { access_token, refresh_token } = res.data as { access_token: string; refresh_token: string }
       localStorage.setItem('access_token', access_token)
       localStorage.setItem('refresh_token', refresh_token)
+
+      const me = await http.get<{ email: string; role: string }>('/auth/me')
+      localStorage.setItem('auth_user', JSON.stringify(me.data))
+
       toast.success('Signed in')
-      navigate('/')
+      navigate(me.data.role === 'admin' ? '/admin' : '/app')
     } catch (e) {
       toast.error('Login failed')
     }

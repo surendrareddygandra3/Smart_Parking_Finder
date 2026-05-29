@@ -4,9 +4,9 @@ from typing import Optional
 
 
 class CreateBookingRequest(BaseModel):
-    lot_id: str
-    slot_id: str
+    lot_id: str | int
     vehicle_type: str
+    slot_id: str | None = None  # optional — auto-picks first available slot
 
 class CreateBookingResponse(BaseModel):
     message: str

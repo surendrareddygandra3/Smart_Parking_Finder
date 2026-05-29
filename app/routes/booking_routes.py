@@ -1,69 +1,51 @@
-from fastapi import APIRouter, HTTPException, Header, Query
+from fastapi import APIRouter, Depends, Query
+
 from app.core.auth import get_auth_context
-from app.services.booking_service import create_booking, list_bookings, get_booking_by_id, release_booking, update_booking
-from app.models.booking_models import CreateBookingRequest, CreateBookingResponse, BookingsResponse, BookingByIdResponse, UpdateBookingRequest
+from app.models.booking_models import CreateBookingRequest, BookingsResponse
+from app.services.booking_service import create_booking, list_bookings, get_booking_by_id, release_booking
 from app.utils.logger import get_logger
-from fastapi import Depends
 
 router = APIRouter()
-
 logger = get_logger(__name__)
 
+
 @router.post("/create")
-async def create_booking_route(
-    booking_data: CreateBookingRequest,
+async def create_booking_route(booking_data: CreateBookingRequest, auth: dict = Depends(get_auth_context)):
+    return await create_booking(booking_data, auth["payload"])
+
+
+@router.post("/reserve")
+async def reserve_booking_route(
+    lot_id: int,
+    vehicle_type: str,
     auth: dict = Depends(get_auth_context),
 ):
-    """
-    Create a new parking booking (with JWT auth).
-    """
-    try:
-        # ✅ Pass user info if you need (e.g., user_id, email)
-        result = await create_booking(booking_data, auth["payload"])
+    """Simple booking: only lot + vehicle type (auto-picks slot)."""
+    payload = CreateBookingRequest(lot_id=lot_id, vehicle_type=vehicle_type, slot_id=None)
+    return await create_booking(payload, auth["payload"])
 
-        return result
-
-    except HTTPException as e:
-        logger.warning(f"Booking creation failed: {e.detail}")
-        raise e
-    except Exception as e:
-        logger.error(f"Unexpected error during booking creation: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
-
-    
 
 @router.get("/list", response_model=list[BookingsResponse])
-async def list_bookings_route(user_email: str | None = Query(default=None)):
-    """
-    List all bookings, optionally filtered by user email.
-    """
-    return await list_bookings(user_email)
+async def list_bookings_route(
+    user_email: str | None = Query(default=None),
+    auth: dict = Depends(get_auth_context),
+):
+    email = auth["payload"].get("email")
+    role = auth["payload"].get("role", "user")
+    if role != "admin":
+        return await list_bookings(email)
+    return await list_bookings(user_email or email)
 
-@router.get("/{booking_id}", response_model=BookingByIdResponse)
-async def get_booking_route(booking_id: str):
-    return await get_booking_by_id(booking_id)
 
-
-@router.put("/update/{booking_id}")
-async def update_booking_route(booking_id: str, update_data: UpdateBookingRequest):
-    try:
-        return await update_booking(
-            booking_id,
-            new_slot_id=update_data.new_slot_id,
-            new_vehicle_type=update_data.new_vehicle_type
-        )
-    except HTTPException as e:
-        raise e
-    except Exception as e:
-        logger.error(f"Unexpected error updating booking {booking_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+@router.get("/{booking_id}")
+async def get_booking_route(booking_id: str, auth: dict = Depends(get_auth_context)):
+    role = auth["payload"].get("role", "user")
+    email = None if role == "admin" else auth["payload"].get("email")
+    return await get_booking_by_id(booking_id, email)
 
 
 @router.delete("/release/{booking_id}")
-async def release_booking_route(booking_id: str):
-    return await release_booking(booking_id)
-
-
-
-
-
+async def release_booking_route(booking_id: str, auth: dict = Depends(get_auth_context)):
+    role = auth["payload"].get("role", "user")
+    email = None if role == "admin" else auth["payload"].get("email")
+    return await release_booking(booking_id, email)

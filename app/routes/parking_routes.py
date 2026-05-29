@@ -1,43 +1,34 @@
-from typing import List
-from fastapi import APIRouter, Header, HTTPException, Depends, Query
-from app.services.parking_services import list_parkings_service, parking_details, available_slots, available_slots_by_vehicle_type
-from app.utils.decorator import handle_exceptions
-from app.models.parking_models import ParkingLotResponse
-from app.utils.logger import get_logger
+from fastapi import APIRouter, Depends, Query
+
 from app.core.auth import get_auth_context
+from app.models.parking_models import ParkingLotResponse
+from app.services.parking_services import list_parkings_service, parking_details, available_slots
+from app.utils.logger import get_logger
 
 router = APIRouter()
-
 logger = get_logger(__name__)
+
 
 @router.get("/list", response_model=ParkingLotResponse)
 async def get_parkings(
     vehicle_type: str | None = Query(default=None),
     auth: dict = Depends(get_auth_context),
 ):
-    """
-    List all parking lots. Optional filter by vehicle_type.
-    Requires Authorization header: Bearer <token>
-    """
-    # `auth` is validated (JWT + session + blacklist). Keep service signature for now.
-    parkings_list = await list_parkings_service(auth["token"], vehicle_type)
-    
+    _ = auth
+    parkings_list = await list_parkings_service(vehicle_type)
     return {"parkings": parkings_list}
 
-@router.get("/parkings/{lot_id}", response_model=dict)
-async def get_parking_details(
-    lot_id: int,
-    auth: dict = Depends(get_auth_context),
-):  
-    logger.info("Parkings List requested.")
 
-    # ✅ Pass only lot_id to service
+@router.get("/lots/{lot_id}")
+async def get_parking_details(lot_id: int, auth: dict = Depends(get_auth_context)):
+    _ = auth
     return await parking_details(lot_id)
+
 
 @router.get("/slots/available")
 async def get_available_slots(
-    vehicle_type: str | None = Query(None, description="Filter by vehicle type (car/bike/etc)"),
+    vehicle_type: str | None = Query(None),
     auth: dict = Depends(get_auth_context),
-):  
-
+):
+    _ = auth
     return await available_slots(vehicle_type)

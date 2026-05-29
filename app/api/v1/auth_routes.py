@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 
-from app.core.auth import get_current_user_payload, get_current_token
-from app.models.auth_models import AuthLoginRequest, RefreshRequest, TokenPair, AuthMeResponse, AuthRegisterRequest
-from app.services.auth_service import login, refresh, register_admin
+from app.core.auth import get_current_user_payload
+from app.models.auth_models import AuthLoginRequest, RefreshRequest, TokenPair, AuthMeResponse
+from app.services.auth_service import login, refresh
 
 router = APIRouter()
 
@@ -20,10 +20,3 @@ async def refresh_route(data: RefreshRequest):
 @router.get("/me", response_model=AuthMeResponse)
 async def me_route(payload: dict = Depends(get_current_user_payload)):
     return {"email": payload.get("email"), "role": payload.get("role", "user"), "sub": payload.get("sub")}
-
-
-# Admin bootstrap (you can later lock this behind one-time key / migration)
-@router.post("/admin/register")
-async def register_admin_route(data: AuthRegisterRequest):
-    return await register_admin(data.username, data.email, data.password)
-

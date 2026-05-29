@@ -215,3 +215,58 @@
 2025-10-13 16:58:41,577 - app.services.booking_service - INFO - MainThread - Booking BB396CD0D updated successfully
 2025-10-13 16:58:51,010 - app.services.booking_service - WARNING - MainThread - Booking not found: B20CD51BD
 2025-10-13 16:58:55,496 - app.services.booking_service - INFO - MainThread - Booking BB396CD0D released and deleted successfully
+2026-05-29 18:07:41,465 - app.routes.user_routes - INFO - MainThread - New Registration attempt initiated.
+2026-05-29 18:07:41,940 - app.services.user_service - INFO - MainThread - New user created: Surendra ReddyGandra with email surendrareddygandra3@gmail.com
+2026-05-29 18:07:41,944 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:07:59,381 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:07:59,395 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:07:59,469 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:07:59,489 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:08:57,278 - app.routes.booking_routes - WARNING - MainThread - Booking creation failed: Invalid vehicle type for this slot
+2026-05-29 18:08:57,280 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:10:54,950 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:10:54,956 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:10:56,122 - app.routes.booking_routes - WARNING - MainThread - Booking creation failed: Invalid vehicle type for this slot
+2026-05-29 18:10:56,124 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:10:57,768 - app.routes.booking_routes - WARNING - MainThread - Booking creation failed: Invalid vehicle type for this slot
+2026-05-29 18:10:57,769 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:11:00,995 - app.routes.booking_routes - WARNING - MainThread - Booking creation failed: Invalid vehicle type for this slot
+2026-05-29 18:11:00,996 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:14:27,405 - app.core.middleware - INFO - Thread-1 (run_blocking_portal) - request
+2026-05-29 18:18:54,159 - app.core.dependencies - INFO - MainThread - Session created for surendrareddygandra3@gmail.com
+2026-05-29 18:18:54,163 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:18:54,189 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:18:54,282 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:18:54,294 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:18:58,759 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:20:06,408 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:20:07,695 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:20:08,809 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:22:34,061 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:22:34,063 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:22:38,740 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:22:38,743 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:29,945 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:29,954 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:31,483 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:31,485 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:33,637 - app.services.booking_service - INFO - MainThread - Booking B3C050880 created for surendrareddygandra3@gmail.com at lot 1 slot 1-2
+2026-05-29 18:23:33,638 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:33,652 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:33,658 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:51,892 - app.services.booking_service - INFO - MainThread - Booking B2EC17C09 created for surendrareddygandra3@gmail.com at lot 2 slot 2-2
+2026-05-29 18:23:51,893 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:51,906 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:51,914 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:53,754 - app.services.booking_service - INFO - MainThread - Booking B6B4ED701 created for surendrareddygandra3@gmail.com at lot 3 slot 3-2
+2026-05-29 18:23:53,755 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:53,770 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:53,772 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:55,137 - app.services.booking_service - INFO - MainThread - Booking BC286DDA8 created for surendrareddygandra3@gmail.com at lot 5 slot 5-2
+2026-05-29 18:23:55,139 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:55,157 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:55,159 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:56,456 - app.services.booking_service - INFO - MainThread - Booking B49FB217A created for surendrareddygandra3@gmail.com at lot 4 slot 4-2
+2026-05-29 18:23:56,457 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:56,471 - app.core.middleware - INFO - MainThread - request
+2026-05-29 18:23:56,474 - app.core.middleware - INFO - MainThread - request
